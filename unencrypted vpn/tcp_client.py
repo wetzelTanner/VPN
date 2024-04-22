@@ -16,7 +16,7 @@ tun = os.open("/dev/net/tun", os.O_RDWR)
 ifr = struct.pack('16sH', b'tun%d', IFF_TUN | IFF_NO_PI)
 ifname_bytes = fcntl.ioctl(tun, TUNSETIFF, ifr)
 
-# Get the interface name
+# get the interface name
 ifname = ifname_bytes.decode('utf-8')[:16].strip('\x00')
 print("Created TUN interface: {}".format(ifname))
 
@@ -25,8 +25,9 @@ os.system("ip addr add 10.0.53.99/24 dev {}".format(ifname))
 os.system("ip link set dev {} up".format(ifname))
 os.system("ip route add 192.168.56.0/24 dev tun0")
 
-# create UDP socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# create TCP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect(("10.0.2.8", 9090))
 
 fds = [sock, tun]
 
@@ -35,7 +36,7 @@ while True:
 
     for fd in ready:
         if fd is sock:
-            data, (ip, port) = sock.recvfrom(2048) # retrieve the packet
+            data = sock.recv(2048) # retrieve the packet
             pkt = IP(data)
             print("From socket <==: {} --> {}".format(pkt.src, pkt.dst))
             os.write(tun, data) # give the packet to the kernel
@@ -44,4 +45,4 @@ while True:
             packet = os.read(tun, 2048)
             pkt = IP(packet)
             print("From tun      ==>: {} --> {}".format(pkt.src, pkt.dst))
-            sock.sendto(packet, ("10.0.2.15", 9090))
+            sock.send(packet)
