@@ -29,7 +29,7 @@ os.system("ip route add 192.168.56.0/24 dev {}".format(ifname))
 # provide server hostname and ssl client context
 hostname = "tanner-aj-vpn.com"
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-context.load_verify_locations(cafile="./newservcert.pem")
+context.load_verify_locations(cafile="./server-ca.pem")
 context.verify_mode = ssl.CERT_REQUIRED
 context.check_hostname = True
 

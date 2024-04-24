@@ -27,7 +27,7 @@ os.system("ip link set dev {} up".format(ifname))
 
 # provide context for the ssl connection
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-context.load_cert_chain(certfile="./newservcert.pem", keyfile="./server-key.pem")
+context.load_cert_chain(certfile="./server-cert.pem", keyfile="./server-key.pem")
 
 # set up the socket
 IP_A = "0.0.0.0"
