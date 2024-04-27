@@ -17,7 +17,7 @@ tun = os.open("/dev/net/tun", os.O_RDWR)
 ifr = struct.pack('16sH', b'tun%d', IFF_TUN | IFF_NO_PI)
 ifname_bytes = fcntl.ioctl(tun, TUNSETIFF, ifr)
 
-# Get the interface name
+# get the interface name
 ifname = ifname_bytes.decode('utf-8')[:16].strip('\x00')
 print("Created TUN interface: {}".format(ifname))
 
@@ -37,7 +37,7 @@ context.check_hostname = True
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(('10.0.2.8', 9090))
 
-# Wrap the socket with SSL
+# wrap the socket with SSL
 tls_sock = context.wrap_socket(sock, server_hostname=hostname)
 
 fds = [tls_sock, tun]
