@@ -4,7 +4,7 @@ import struct
 import os
 import socket
 import select
-from scapy.all import*
+from scapy.all import *
 
 TUNSETIFF = 0x400454ca
 IFF_TUN = 0x0001  # this flag will be used
