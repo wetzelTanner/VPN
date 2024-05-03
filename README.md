@@ -1,5 +1,5 @@
 # VPN
-Python VPN project. All tutorials on this page are made for MacOS users, functions within the VirtualBox application may be in different locations for Windows or Linux users.
+Simple Python VPN project. All tutorials on this page are made for MacOS users, functions within the VirtualBox application may be in different locations for Windows or Linux users.
 
 ## VM Setup
 In this project, we will use [VirtualBox](https://www.virtualbox.org/wiki/Downloads) to emulate different Ubuntu systems, and we will use the Ubuntu image configured by SEED Labs available [here](https://seed.nyc3.cdn.digitaloceanspaces.com/SEED-Ubuntu20.04.zip). To create the VM, SEED Labs has made a tutorial [here](https://github.com/seed-labs/seed-labs/blob/master/manuals/vm/seedvm-manual.md#step-1-create-a-new-vm-in-virtualbox).
